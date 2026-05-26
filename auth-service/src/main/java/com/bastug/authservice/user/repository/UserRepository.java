@@ -1,0 +1,8 @@
+package com.bastug.authservice.user.repository;
+
+import com.bastug.authservice.user.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User,Long> {
+    boolean existsByEmail(String email);
+}
