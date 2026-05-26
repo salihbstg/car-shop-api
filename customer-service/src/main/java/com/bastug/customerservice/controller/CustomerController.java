@@ -33,10 +33,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getCustomer(id));
     }
 
-    @GetMapping("/email")
+    @GetMapping("/by-email")
     ResponseEntity<CustomerResponse> getCustomerByEmail(@RequestParam String email) {
         return ResponseEntity.ok(customerService.getCustomerByEmail(email));
     }
+
 
     @PatchMapping("{id}")
     ResponseEntity<CustomerResponse> updateCustomer(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest, @PathVariable Long id){

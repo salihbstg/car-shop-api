@@ -9,6 +9,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface CarMapper {
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "customerId",ignore = true)
     Car toCar(CreateCarRequest createCarRequest);
 
     CarResponse toCarResponse(Car save);

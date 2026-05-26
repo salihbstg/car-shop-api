@@ -1,5 +1,7 @@
 package com.bastug.carservice.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import feign.FeignException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +9,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import tools.jackson.databind.exc.InvalidFormatException;
+
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -35,7 +37,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         Throwable cause = ex.getCause();
         if (cause instanceof InvalidFormatException invalidFormatException) {
-            String fieldName=invalidFormatException.getPath().getFirst().getPropertyName();
+            String fieldName=invalidFormatException.getPath().getFirst().getFieldName();
             if(fieldName.equals("fuelType"))
                 errors.put("fuelType","Yakıt tipini kontrol edin!");
             if(fieldName.equals("transmissionType"))
@@ -64,6 +66,16 @@ public class GlobalExceptionHandler {
             HttpServletRequest request
     ){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+
+
+
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<String> handleFeignException(
+            FeignException ex,
+            HttpServletRequest request
+    ){
+        return ResponseEntity.status(ex.status()).body(ex.contentUTF8());
     }
 
 }

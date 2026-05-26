@@ -5,7 +5,6 @@ import com.bastug.carservice.enums.FuelType;
 import com.bastug.carservice.enums.TransmissionType;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,5 +34,6 @@ public class UpdateCarRequest {
     private CarColor carColor;
     private TransmissionType transmissionType;
     private FuelType fuelType;
+    private Long customerId;
 }
 

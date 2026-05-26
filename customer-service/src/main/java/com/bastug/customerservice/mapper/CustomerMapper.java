@@ -6,8 +6,6 @@ import com.bastug.customerservice.dtos.CustomerUpdateRequest;
 import com.bastug.customerservice.entity.Customer;
 import org.mapstruct.*;
 
-import java.util.Optional;
-
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
     Customer toCustomer(CreateCustomerRequest createCustomerRequest);

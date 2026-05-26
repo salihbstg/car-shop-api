@@ -3,10 +3,6 @@ package com.bastug.customerservice.service;
 import com.bastug.customerservice.dtos.CreateCustomerRequest;
 import com.bastug.customerservice.dtos.CustomerResponse;
 import com.bastug.customerservice.dtos.CustomerUpdateRequest;
-import org.jspecify.annotations.Nullable;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapping;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

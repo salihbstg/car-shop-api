@@ -19,4 +19,5 @@ public class CarResponse {
     private CarColor carColor;
     private TransmissionType transmissionType;
     private FuelType fuelType;
+    private CustomerResponse customerResponse;
 }

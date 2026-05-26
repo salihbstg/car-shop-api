@@ -69,11 +69,14 @@ public class CustomerServiceImpl implements CustomerService {
         return customerMapper.toResponse(customer);
     }
 
+
     @Override
     public Page<CustomerResponse> getCustomers(Pageable pageable) {
         Page<Customer> customers = customerRepository.findAll(pageable);
         return customers.map(customerMapper::toResponse);
     }
+
+
 
 
 }

@@ -32,4 +32,7 @@ public class CreateCarRequest {
     private TransmissionType transmissionType;
     @NotNull(message = "Yakıt seçimi yapınız!")
     private FuelType fuelType;
+
+    @NotNull(message = "Araç sahibi boş olamaz")
+    private Long customerId;
 }

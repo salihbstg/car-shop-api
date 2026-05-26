@@ -4,7 +4,6 @@ import com.bastug.carservice.dtos.CarResponse;
 import com.bastug.carservice.dtos.CreateCarRequest;
 import com.bastug.carservice.dtos.UpdateCarRequest;
 import com.bastug.carservice.enums.FuelType;
-import org.jspecify.annotations.Nullable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
