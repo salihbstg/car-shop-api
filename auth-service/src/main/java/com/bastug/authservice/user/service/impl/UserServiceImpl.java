@@ -4,7 +4,7 @@ import com.bastug.authservice.auth.dto.RegisterResponse;
 import com.bastug.authservice.auth.dto.LoginRequest;
 import com.bastug.authservice.auth.dto.LoginResponse;
 import com.bastug.authservice.auth.dto.RegisterRequest;
-import com.bastug.authservice.security.JwtService;
+import com.bastug.authservice.jwt.JwtService;
 import com.bastug.authservice.user.dto.CustomerDetail;
 import com.bastug.authservice.user.entity.Role;
 import com.bastug.authservice.user.entity.User;

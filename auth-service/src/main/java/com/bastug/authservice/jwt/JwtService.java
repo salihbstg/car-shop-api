@@ -1,4 +1,4 @@
-package com.bastug.authservice.security;
+package com.bastug.authservice.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

@@ -1,6 +1,6 @@
 package com.bastug.authservice.config;
 
-import com.bastug.authservice.security.JwtAuthFilter;
+import com.bastug.authservice.jwt.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

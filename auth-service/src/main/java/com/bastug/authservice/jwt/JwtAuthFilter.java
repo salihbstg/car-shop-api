@@ -1,4 +1,4 @@
-package com.bastug.authservice.security;
+package com.bastug.authservice.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

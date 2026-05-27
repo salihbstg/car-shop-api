@@ -31,13 +31,19 @@ public class CarServiceImpl implements CarService {
         if(carRepository.existsByPlate(createCarRequest.getPlate())){
             throw new DuplicatePlateException(createCarRequest.getPlate());
         }
+        System.out.println("1");
         CustomerResponse customer=customerClient.getCustomer(createCarRequest.getCustomerId());
-
+        System.out.println("2");
         Car car=carMapper.toCar(createCarRequest);
+        System.out.println("3");
         car.setCustomerId(createCarRequest.getCustomerId());
+        System.out.println("4");
         carRepository.save(car);
+        System.out.println("5");
         CarResponse carResponse= carMapper.toCarResponse(car);
+        System.out.println("6");
         carResponse.setCustomerResponse(customer);
+        System.out.println("7");
         return carResponse;
     }
 

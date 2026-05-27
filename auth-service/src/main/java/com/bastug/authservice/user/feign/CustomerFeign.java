@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
         name = "customer-service",
-        url = "http://localhost:8081/api/v1/customers/"
+        url = "http://localhost:8081/api/v1/customers"
 )
 public interface CustomerFeign {
     @PostMapping

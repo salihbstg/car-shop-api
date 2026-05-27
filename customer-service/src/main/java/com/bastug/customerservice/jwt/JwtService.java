@@ -2,7 +2,6 @@ package com.bastug.customerservice.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +11,16 @@ import java.util.Date;
 @Service
 public class JwtService {
     @Value("${secret}")
-    private String secretKey;
+    private String secret;
 
-    private SecretKey getSignInKey(){
-        return Keys.hmacShaKeyFor(secretKey.getBytes());
+    private SecretKey getSignInKey() {
+        return Keys.hmacShaKeyFor(
+                secret.getBytes()
+        );
     }
 
+    public String extractUsername(String token) {
 
-    public String extractUsername(String token){
         return Jwts
                 .parser()
                 .verifyWith(getSignInKey())
@@ -29,18 +30,15 @@ public class JwtService {
                 .getSubject();
     }
 
-    private boolean isTokenExpired(String token){
+    public boolean isTokenValid(String token) {
         Date expirationDate= Jwts
                 .parser()
-                .verifyWith(getSignInKey())
+                .verifyWith((SecretKey) getSignInKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload()
                 .getExpiration();
-        return expirationDate.before(new Date());
+        return !expirationDate.before(new Date());
     }
 
-    public boolean isTokenValid(String token){
-        return !isTokenExpired(token);
-    }
 }
