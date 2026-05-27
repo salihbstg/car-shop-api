@@ -1,6 +1,7 @@
 package com.bastug.authservice.auth.controller;
 
-import com.bastug.authservice.auth.dto.AuthResponse;
+import com.bastug.authservice.auth.dto.LoginResponse;
+import com.bastug.authservice.auth.dto.RegisterResponse;
 import com.bastug.authservice.auth.dto.LoginRequest;
 import com.bastug.authservice.auth.dto.RegisterRequest;
 import com.bastug.authservice.user.service.UserService;
@@ -19,12 +20,12 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/register")
-    ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest registerRequest) {
+    ResponseEntity<RegisterResponse> register(@RequestBody @Valid RegisterRequest registerRequest) {
         return ResponseEntity.ok(userService.register(registerRequest));
     }
 
     @PostMapping("/login")
-    ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequest loginRequest){
+    ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest){
         return ResponseEntity.ok(userService.login(loginRequest));
     }
 }

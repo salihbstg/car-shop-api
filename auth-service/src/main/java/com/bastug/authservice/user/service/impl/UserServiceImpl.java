@@ -1,13 +1,16 @@
 package com.bastug.authservice.user.service.impl;
 
-import com.bastug.authservice.auth.dto.AuthResponse;
+import com.bastug.authservice.auth.dto.RegisterResponse;
 import com.bastug.authservice.auth.dto.LoginRequest;
+import com.bastug.authservice.auth.dto.LoginResponse;
 import com.bastug.authservice.auth.dto.RegisterRequest;
 import com.bastug.authservice.security.JwtService;
+import com.bastug.authservice.user.dto.CustomerDetail;
 import com.bastug.authservice.user.entity.Role;
 import com.bastug.authservice.user.entity.User;
 import com.bastug.authservice.user.exception.EmailAlreadyExistsException;
 import com.bastug.authservice.user.exception.UserNotFoundException;
+import com.bastug.authservice.user.feign.CustomerFeign;
 import com.bastug.authservice.user.repository.UserRepository;
 import com.bastug.authservice.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,28 +26,37 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final CustomerFeign customerFeign;
     @Override
-    public AuthResponse register(RegisterRequest registerRequest) {
+    public RegisterResponse register(RegisterRequest registerRequest) {
         if(userRepository.existsByEmail(registerRequest.email())){
             throw new EmailAlreadyExistsException(registerRequest.email());
         }
         User user=new User();
         user.setRole(Role.USER);
-        user.setEmail(registerRequest.email());
+        user.setEmail(registerRequest.email()); // bura çözmez mi
         user.setUsername(registerRequest.username());
         user.setPassword(passwordEncoder.encode(registerRequest.password()));
+        CustomerDetail customerDetail=new CustomerDetail(
+                registerRequest.firstName(),
+                registerRequest.lastName(),
+                registerRequest.email(),
+                registerRequest.phone()
+        );
+        customerFeign.createCustomer(customerDetail);
         userRepository.save(user);
-        return new AuthResponse(
+        return new RegisterResponse(
                 jwtService.generateToken(registerRequest.email()),
                 user.getId(),
                 user.getEmail(),
                 user.getUsername(),
-                user.getRole()
+                user.getRole(),
+                customerDetail
         );
     }
 
     @Override
-    public AuthResponse login(LoginRequest loginRequest) {
+    public LoginResponse login(LoginRequest loginRequest) {
         Optional<User> optionalUser=userRepository.findByEmailOrUsername(loginRequest.identifier(), loginRequest.identifier());
         if(optionalUser.isEmpty()){
             throw new UserNotFoundException();
@@ -53,7 +65,8 @@ public class UserServiceImpl implements UserService {
         if(!passwordEncoder.matches(loginRequest.password(),user.getPassword())){
             throw new BadCredentialsException("Şifre hatalı!");
         }
-        return new AuthResponse(
+
+        return new LoginResponse(
                 jwtService.generateToken(user.getUsername()),
                 user.getId(),
                 user.getUsername(),

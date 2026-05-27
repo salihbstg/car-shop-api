@@ -17,6 +17,9 @@ public record RegisterRequest(
         @NotBlank(message = "Şifre boş olamaz!")
         @Size(min = 6,
                 message = "Şifre en az 6 karakter olmalıdır!")
-        String password
+        String password,
+        String firstName,
+        String lastName,
+        String phone
 ) {
 }
