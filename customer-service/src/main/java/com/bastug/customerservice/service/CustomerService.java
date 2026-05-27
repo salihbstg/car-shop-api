@@ -13,4 +13,6 @@ public interface CustomerService {
     void deleteCustomer(Long id);
     CustomerResponse getCustomerByEmail(String email);
     Page<CustomerResponse> getCustomers(Pageable pageable);
+
+    Boolean existsByPhone(String phone);
 }

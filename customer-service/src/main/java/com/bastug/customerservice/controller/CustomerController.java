@@ -38,6 +38,10 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getCustomerByEmail(email));
     }
 
+    @GetMapping("/by-phone")
+    ResponseEntity<Boolean> existsByPhone(@RequestParam String phone){
+        return ResponseEntity.ok(customerService.existsByPhone(phone));
+    }
 
     @PatchMapping("{id}")
     ResponseEntity<CustomerResponse> updateCustomer(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest, @PathVariable Long id){

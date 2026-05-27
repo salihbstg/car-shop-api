@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
         if(customerRepository.findByEmail(createCustomerRequest.email())!=null){
             throw new EmailAlreadyExistsException(createCustomerRequest.email());
         }
-        if (customerRepository.findByPhone(createCustomerRequest.phone())!=null) {
+        if (customerRepository.existsByPhone(createCustomerRequest.phone())) {
             throw new PhoneAlreadyExistsException(createCustomerRequest.phone());
         }
         Customer customer = customerMapper.toCustomer(createCustomerRequest);
@@ -76,7 +76,10 @@ public class CustomerServiceImpl implements CustomerService {
         return customers.map(customerMapper::toResponse);
     }
 
-
+    @Override
+    public Boolean existsByPhone(String phone) {
+        return customerRepository.existsByPhone(phone);
+    }
 
 
 }

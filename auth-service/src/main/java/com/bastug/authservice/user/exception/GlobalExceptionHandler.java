@@ -12,19 +12,34 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<String> emailAlreadyExists(
             EmailAlreadyExistsException ex
-    ){
+    ) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
+
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> userNotFound(
+    public ResponseEntity<String> userNotFoundException(
             UserNotFoundException ex
-    ){
+    ) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<String> badCredentialsException(
             BadCredentialsException ex
-    ){
+    ) {
         return ResponseEntity.status(403).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(PhoneAlreadyExistsException.class)
+    public ResponseEntity<String> phoneAlreadyExistsException(
+            PhoneAlreadyExistsException ex
+    ) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ResponseEntity<String> usernameAlreadyExistsException(
+            UsernameAlreadyExistsException usernameAlreadyExistsException
+    ){
+        return ResponseEntity.badRequest().body(usernameAlreadyExistsException.getMessage());
     }
 }
