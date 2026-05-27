@@ -1,9 +1,11 @@
 package com.bastug.authservice.user.service;
 
+import com.bastug.authservice.auth.dto.AuthResponse;
+import com.bastug.authservice.auth.dto.LoginRequest;
 import com.bastug.authservice.auth.dto.RegisterRequest;
-import jakarta.validation.Valid;
-import org.springframework.stereotype.Service;
+
 
 public interface UserService {
-    String register(@Valid RegisterRequest registerRequest);
+    AuthResponse register(RegisterRequest registerRequest);
+    AuthResponse login(LoginRequest loginRequest);
 }

@@ -1,4 +1,7 @@
 package com.bastug.authservice.auth.dto;
 
-public record LoginRequest(){
+public record LoginRequest(
+        String identifier,
+        String password
+){
 }

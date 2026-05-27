@@ -1,15 +1,21 @@
 package com.bastug.authservice.user.service.impl;
 
+import com.bastug.authservice.auth.dto.AuthResponse;
+import com.bastug.authservice.auth.dto.LoginRequest;
 import com.bastug.authservice.auth.dto.RegisterRequest;
 import com.bastug.authservice.security.JwtService;
 import com.bastug.authservice.user.entity.Role;
 import com.bastug.authservice.user.entity.User;
 import com.bastug.authservice.user.exception.EmailAlreadyExistsException;
+import com.bastug.authservice.user.exception.UserNotFoundException;
 import com.bastug.authservice.user.repository.UserRepository;
 import com.bastug.authservice.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     @Override
-    public String register(RegisterRequest registerRequest) {
+    public AuthResponse register(RegisterRequest registerRequest) {
         if(userRepository.existsByEmail(registerRequest.email())){
             throw new EmailAlreadyExistsException(registerRequest.email());
         }
@@ -28,6 +34,31 @@ public class UserServiceImpl implements UserService {
         user.setUsername(registerRequest.username());
         user.setPassword(passwordEncoder.encode(registerRequest.password()));
         userRepository.save(user);
-        return jwtService.generateToken(registerRequest.email());
+        return new AuthResponse(
+                jwtService.generateToken(registerRequest.email()),
+                user.getId(),
+                user.getEmail(),
+                user.getUsername(),
+                user.getRole()
+        );
+    }
+
+    @Override
+    public AuthResponse login(LoginRequest loginRequest) {
+        Optional<User> optionalUser=userRepository.findByEmailOrUsername(loginRequest.identifier(), loginRequest.identifier());
+        if(optionalUser.isEmpty()){
+            throw new UserNotFoundException();
+        }
+        User user=optionalUser.get();
+        if(!passwordEncoder.matches(loginRequest.password(),user.getPassword())){
+            throw new BadCredentialsException("Şifre hatalı!");
+        }
+        return new AuthResponse(
+                jwtService.generateToken(user.getUsername()),
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRole()
+        );
     }
 }

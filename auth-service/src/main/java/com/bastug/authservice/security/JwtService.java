@@ -1,7 +1,6 @@
 package com.bastug.authservice.security;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class JwtService {
                 .compact();
     }
 
-    public String extractEmail(String token){
+    public String extractUsername(String token){
         return Jwts
                 .parser()
                 .verifyWith((SecretKey)getSignInKey())
@@ -51,10 +50,8 @@ public class JwtService {
         return expirationDate.before(new Date());
     }
 
-    public boolean isTokenValid(String token,String email){
-        String extractedEmail=extractEmail(token);
-        return extractedEmail.equals(email)
-                && !isTokenExpired(token);
+    public boolean isTokenValid(String token){
+        return !isTokenExpired(token);
     }
 
 }
