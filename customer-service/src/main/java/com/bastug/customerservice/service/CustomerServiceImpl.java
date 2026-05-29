@@ -85,8 +85,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponse findWithToken(String token) {
-        String email=jwtService.extractUsername(token);
-        return getCustomerByEmail(email);
+        String username=jwtService.extractUsername(token);
+        Customer customer= customerRepository.findByUsername(username);
+        return customerMapper.toResponse(customer);
     }
 
 
