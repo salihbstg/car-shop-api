@@ -27,7 +27,6 @@ public class CustomerController {
     ResponseEntity<Page<CustomerResponse>> getCustomers(Pageable pageable) {
         return ResponseEntity.ok(customerService.getCustomers(pageable));
     }
-
     @GetMapping("{id}")
     ResponseEntity<CustomerResponse> getCustomer(@PathVariable Long id) {
         return ResponseEntity.ok(customerService.getCustomer(id));
@@ -53,6 +52,9 @@ public class CustomerController {
         customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
-
+    @GetMapping("/me")
+    ResponseEntity<CustomerResponse> getCustomerByToken(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(customerService.findWithToken(token.substring(7)));
+    }
 
 }

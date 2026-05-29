@@ -42,13 +42,14 @@ public class UserServiceImpl implements UserService {
         }
         User user=new User();
         user.setRole(Role.USER);
-        user.setEmail(registerRequest.email()); // bura çözmez mi
+        user.setEmail(registerRequest.email());
         user.setUsername(registerRequest.username());
         user.setPassword(passwordEncoder.encode(registerRequest.password()));
         CustomerDetail customerDetail=new CustomerDetail(
                 registerRequest.firstName(),
                 registerRequest.lastName(),
                 registerRequest.email(),
+                registerRequest.username(),
                 registerRequest.phone()
         );
         customerFeign.createCustomer(customerDetail);

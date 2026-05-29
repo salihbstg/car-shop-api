@@ -24,6 +24,8 @@ public class Customer {
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
+    private String username;
+    @Column(nullable = false)
     private String phone;
 
     private LocalDate createdAt;

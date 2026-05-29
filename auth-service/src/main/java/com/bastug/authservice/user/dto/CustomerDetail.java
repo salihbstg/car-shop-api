@@ -4,6 +4,7 @@ public record CustomerDetail(
         String firstName,
         String lastName,
         String email,
+        String username,
         String phone
 ) {
 }

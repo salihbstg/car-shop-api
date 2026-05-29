@@ -15,4 +15,6 @@ public interface CustomerService {
     Page<CustomerResponse> getCustomers(Pageable pageable);
 
     Boolean existsByPhone(String phone);
+
+    CustomerResponse findWithToken(String token);
 }

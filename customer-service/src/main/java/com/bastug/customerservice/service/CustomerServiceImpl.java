@@ -7,6 +7,7 @@ import com.bastug.customerservice.entity.Customer;
 import com.bastug.customerservice.exception.CustomerNotFountException;
 import com.bastug.customerservice.exception.EmailAlreadyExistsException;
 import com.bastug.customerservice.exception.PhoneAlreadyExistsException;
+import com.bastug.customerservice.jwt.JwtService;
 import com.bastug.customerservice.mapper.CustomerMapper;
 import com.bastug.customerservice.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final JwtService jwtService;
 
     @Override
     public CustomerResponse createCustomer(CreateCustomerRequest createCustomerRequest) {
@@ -79,6 +81,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Boolean existsByPhone(String phone) {
         return customerRepository.existsByPhone(phone);
+    }
+
+    @Override
+    public CustomerResponse findWithToken(String token) {
+        String email=jwtService.extractUsername(token);
+        return getCustomerByEmail(email);
     }
 
 
