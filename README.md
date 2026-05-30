@@ -1,6 +1,6 @@
 🚗 Car Marketplace
 
-A microservice-based vehicle marketplace application developed with Spring Boot, React, and PostgreSQL.
+A microservice-based vehicle marketplace backend application developed with Spring Boot and PostgreSQL.
 
 The platform allows users to register, authenticate using JWT, create vehicle listings, manage their own vehicles, and browse available listings. The project is designed using a microservice architecture to demonstrate modern backend development practices, service-to-service communication, API Gateway usage, and secure authentication mechanisms.
 
