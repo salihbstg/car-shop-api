@@ -47,6 +47,8 @@ Car Service – Handles vehicle listing creation,updating, retrieval, and deleti
 - PostgreSQL
 - Maven
 
+---
+
 📦 Project Goal
 
 The primary goal of this project is to showcase backend development skills, microservice architecture design, secure authentication, and full-stack integration using modern Java and React technologies.
