@@ -16,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,23 +29,16 @@ public class CarServiceImpl implements CarService {
     private final CustomerClient customerClient;
 
     @Override
-    public CarResponse createCar(CreateCarRequest createCarRequest) {
+    public CarResponse createCar(CreateCarRequest createCarRequest,String token) {
         if(carRepository.existsByPlate(createCarRequest.getPlate())){
             throw new DuplicatePlateException(createCarRequest.getPlate());
         }
-        System.out.println("1");
-        CustomerResponse customer=customerClient.getCustomer(createCarRequest.getCustomerId());
-        System.out.println("2");
+        CustomerResponse customer=customerClient.getCustomerByToken(token);
         Car car=carMapper.toCar(createCarRequest);
-        System.out.println("3");
-        car.setCustomerId(createCarRequest.getCustomerId());
-        System.out.println("4");
+        car.setCustomerId(customer.getId());
         carRepository.save(car);
-        System.out.println("5");
         CarResponse carResponse= carMapper.toCarResponse(car);
-        System.out.println("6");
         carResponse.setCustomerResponse(customer);
-        System.out.println("7");
         return carResponse;
     }
 
@@ -111,5 +106,15 @@ public class CarServiceImpl implements CarService {
             carResponse.setCustomerResponse(customerClient.getCustomer(car.getCustomerId()));
             return carResponse;
         });
+    }
+
+    @Override
+    public List<CarResponse> getCarsByCustomerId(Long id) {
+        List<Car> cars=carRepository.findByCustomerId(id);
+        List<CarResponse> carResponses=new ArrayList<>();
+        for(Car car:cars){
+            carResponses.add(carMapper.toCarResponse(car));
+        }
+        return carResponses;
     }
 }

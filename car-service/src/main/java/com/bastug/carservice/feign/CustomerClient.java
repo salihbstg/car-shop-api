@@ -3,8 +3,10 @@ package com.bastug.carservice.feign;
 import com.bastug.carservice.config.FeignConfig;
 import com.bastug.carservice.dtos.CustomerResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @FeignClient(
         name = "customer-service",
@@ -14,4 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CustomerClient {
     @GetMapping("/{id}")
     CustomerResponse getCustomer(@PathVariable("id") Long id);
+    @GetMapping("/me")
+    CustomerResponse getCustomerByToken(@RequestHeader("Authorization") String token);
 }

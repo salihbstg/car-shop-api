@@ -7,9 +7,11 @@ import com.bastug.carservice.enums.FuelType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 
 public interface CarService {
-    CarResponse createCar(CreateCarRequest createCarRequest);
+    CarResponse createCar(CreateCarRequest createCarRequest,String token);
 
     Page<CarResponse> getAllCars(Pageable pageable);
 
@@ -29,4 +31,6 @@ public interface CarService {
             Pageable pageable);
 
     Page<CarResponse> getCarsByBrandAndFuelType(FuelType fuelType, String brand, Pageable pageable);
+
+    List<CarResponse> getCarsByCustomerId(Long id);
 }

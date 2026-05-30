@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface CarRepository extends JpaRepository<Car, Long> {
     Page<Car> findByBrandContainingIgnoreCase(String brand, Pageable pageable);
 
@@ -15,4 +17,6 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     Page<Car> findByFuelTypeAndBrandContainingIgnoreCase(FuelType fuelType, String brand, Pageable pageable);
 
     boolean existsByPlate(String plate);
+
+    List<Car> findByCustomerId(Long id);
 }

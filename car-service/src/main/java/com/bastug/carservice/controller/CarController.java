@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/cars")
 @RequiredArgsConstructor
@@ -21,8 +23,8 @@ public class CarController {
     private final CarService carService;
 
     @PostMapping
-    public ResponseEntity<CarResponse> createCar(@Valid @RequestBody CreateCarRequest createCarRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(carService.createCar(createCarRequest));
+    public ResponseEntity<CarResponse> createCar(@Valid @RequestBody CreateCarRequest createCarRequest,@RequestHeader("Authorization") String token) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(carService.createCar(createCarRequest,token));
     }
     @GetMapping
     public ResponseEntity<Page<CarResponse>> getAllCars(
@@ -44,6 +46,10 @@ public class CarController {
     @GetMapping("{id}")
     public ResponseEntity<CarResponse> getCarById(@PathVariable(name="id") Long id) {
         return ResponseEntity.ok(carService.getCarById(id));
+    }
+    @GetMapping("/by-customer-id")
+    public ResponseEntity<List<CarResponse>> getCarsByCustomerId(@RequestParam(name = "customerId") Long id){
+        return ResponseEntity.ok(carService.getCarsByCustomerId(id));
     }
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteCar(@PathVariable(name = "id") Long id) {
