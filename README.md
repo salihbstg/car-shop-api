@@ -14,32 +14,32 @@ Car Service – Handles vehicle listing creation,updating, retrieval, and deleti
 
 🚀 Features
 
--User Registration and Login
+- User Registration and Login
 
--JWT-Based Authentication and Authorization
+- JWT-Based Authentication and Authorization
 
--Vehicle Listing Management
+- Vehicle Listing Management
 
--User Profile Management
+- User Profile Management
 
--Vehicle Creation and Deletion
+- Vehicle Creation and Deletion
 
--Service-to-Service Communication using OpenFeign
+- Service-to-Service Communication using OpenFeign
 
--RESTful API Design
+- RESTful API Design
 
--Exception Handling and Validation
+- Exception Handling and Validation
 
 🛠️ Technologies
 
--Java 21
--Spring Boot
--Spring Security
--Spring Cloud Gateway
--OpenFeign
--JWT
--PostgreSQL
--Maven
+- Java 21
+- Spring Boot
+- Spring Security
+- Spring Cloud Gateway
+- OpenFeign
+- JWT
+- PostgreSQL
+- Maven
 
 📦 Project Goal
 
