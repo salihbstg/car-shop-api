@@ -62,6 +62,6 @@ The primary goal of this project is to showcase backend development skills, micr
 ---
 
 Method	Endpoint	Description
-POST	/auth/register	Register a new user
-POST	/auth/login	Authenticate user and generate JWT token
+- POST	/auth/register	Register a new user
+- POST	/auth/login	Authenticate user and generate JWT token
 
