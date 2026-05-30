@@ -53,8 +53,6 @@ Car Service – Handles vehicle listing creation,updating, retrieval, and deleti
 
 The primary goal of this project is to showcase backend development skills, microservice architecture design, secure authentication, and full-stack integration using modern Java and React technologies.
 
----
-
 📡 API Endpoints
 
 ---
@@ -73,3 +71,14 @@ The primary goal of this project is to showcase backend development skills, micr
 - GET	/api/v1/customers/{id}	Get customer by ID
 - GET	/api/v1/customers/by-email?email={email}	Get customer by email
 - GET	/api/v1/customers/by-phone?phone={phone}	Check if phone number exists
+
+---
+
+🚗 Car Service
+
+- POST	/api/v1/cars	Create a vehicle listing
+- GET	/api/v1/cars	Get all vehicle listings (paginated)
+- GET	/api/v1/cars/{id}	Get vehicle by ID
+- GET	/api/v1/cars/by-customer-id?customerId={id}	Get vehicles by customer ID
+- PATCH	/api/v1/cars/{id}	Update vehicle listing
+- DELETE	/api/v1/cars/{id}	Delete vehicle listing
