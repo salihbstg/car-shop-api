@@ -57,16 +57,16 @@ The primary goal of this project is to showcase backend development skills, micr
 
 📡 API Endpoints
 
-🔐 Auth Service
-
 ---
+
+🔐 Auth Service
 
 - POST	/auth/register	Register a new user
 - POST	/auth/login	Authenticate user and generate JWT token
 
-👤 Customer Service
-
 ---
+
+👤 Customer Service
 
 - POST	/api/v1/customers	Create a customer
 - GET	/api/v1/customers	Get all customers (paginated)
