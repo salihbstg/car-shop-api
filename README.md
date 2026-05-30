@@ -4,6 +4,8 @@ A microservice-based vehicle marketplace application developed with Spring Boot,
 
 The platform allows users to register, authenticate using JWT, create vehicle listings, manage their own vehicles, and browse available listings. The project is designed using a microservice architecture to demonstrate modern backend development practices, service-to-service communication, API Gateway usage, and secure authentication mechanisms.
 
+---
+
 🏗️ Architecture
 
 Auth Service – Handles user registration, authentication, and JWT generation.
@@ -11,6 +13,8 @@ Auth Service – Handles user registration, authentication, and JWT generation.
 Customer Service – Manages customer information and profile operations.
 
 Car Service – Handles vehicle listing creation,updating, retrieval, and deletion.
+
+---
 
 🚀 Features
 
@@ -29,6 +33,8 @@ Car Service – Handles vehicle listing creation,updating, retrieval, and deleti
 - RESTful API Design
 
 - Exception Handling and Validation
+
+---
 
 🛠️ Technologies
 
