@@ -65,3 +65,18 @@ Method	Endpoint	Description
 - POST	/auth/register	Register a new user
 - POST	/auth/login	Authenticate user and generate JWT token
 
+---
+
+👤 Customer Service
+
+---
+
+Method	Endpoint	Description
+
+---
+
+- POST	/api/v1/customers	Create a customer
+- GET	/api/v1/customers	Get all customers (paginated)
+- GET	/api/v1/customers/{id}	Get customer by ID
+- GET	/api/v1/customers/by-email?email={email}	Get customer by email
+- GET	/api/v1/customers/by-phone?phone={phone}	Check if phone number exists
