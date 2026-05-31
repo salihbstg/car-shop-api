@@ -94,6 +94,14 @@
 			<version>1.5.5.Final</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.5.5.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -136,13 +144,6 @@
 								<path>
 									<groupId>org.projectlombok</groupId>
 									<artifactId>lombok</artifactId>
-								</path>
-								<!-- Source: https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
-								<path>
-									<groupId>org.mapstruct</groupId>
-									<artifactId>mapstruct-processor</artifactId>
-									<version>1.5.5.Final</version>
-									<scope>compile</scope>
 								</path>
 							</annotationProcessorPaths>
 						</configuration>
